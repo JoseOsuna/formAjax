@@ -32,7 +32,7 @@ CREATE TABLE `comentarios` (
   `name` varchar(200) NOT NULL,
   `lastname` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
-  `phone` int(11) NOT NULL,
+  `phone` varchar(200) NOT NULL,
   `comentario` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

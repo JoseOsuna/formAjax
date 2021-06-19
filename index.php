@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputphone">Telefono</label>
-                    <input type="text" class="form-control" id="inputphone" name="phone">
+                    <input type="tel" class="form-control" id="inputphone" name="phone">
                 </div>
             </div>
 
