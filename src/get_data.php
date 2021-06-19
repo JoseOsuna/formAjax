@@ -12,8 +12,16 @@ if ($exec) {
 
     while($row = mysqli_fetch_array($exec))
     {
-        $rawdata['data'][$i] = $row;
-        $i++;
+        $rawdata['data'][] = [
+                                $row["id"],
+                                $row["name"],
+                                $row["lastname"],
+                                $row["email"],
+                                $row["phone"],
+                                $row["comentario"],
+                            ];
+
+        
     }
 
     echo json_encode($rawdata);

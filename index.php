@@ -120,7 +120,7 @@
                     url:'src/insert_data.php',
                     data: $('#formComentarios').serialize(),
                     beforeSend: function() {
-                        $('#btn_enviar').html("loading..-");
+                        $('#btn_enviar').html("loading...");
                         $("#btn_enviar").attr("disabled", true);
 
                     },
