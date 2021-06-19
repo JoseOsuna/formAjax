@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.25/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.25/datatables.min.css" />
 
 </head>
 
@@ -17,12 +17,12 @@
 
     <div class="container">
 
-    <div class="my-5">
-        <div id="monitor">
-        
+        <div class="my-5">
+            <div id="monitor">
+
+            </div>
         </div>
-    </div>
-        <form class="my-5"  name="formComentarios" id="formComentarios">
+        <form class="my-5" name="formComentarios" id="formComentarios">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputname">Nombre</label>
@@ -57,29 +57,29 @@
         <div class="my-5">
             <div id="table_data">
 
-            <table id="data" class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Email</th>
-                        <th>Telefono</th>
-                        <th>Comentario</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Email</th>
-                        <th>Telefono</th>
-                        <th>Comentario</th>
-                    </tr>
-                </tfoot>
-            </table>
-            
+                <table id="data" class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
+                            <th>Comentario</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
+                            <th>Comentario</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
             </div>
         </div>
 
@@ -87,28 +87,26 @@
 
 
     <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- bootstrap scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
-   
+
     <!-- datatable script  -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.25/datatables.min.js"></script>
 
 
     <script>
+        var table_datatable;
 
-    var table_datatable;
+        $(document).ready(function() {
 
-        $(document).ready(function (){
-
-            table_datatable = $('#data').DataTable( {
+            table_datatable = $('#data').DataTable({
                 "ajax": 'src/get_data.php'
-            } );
+            });
 
-
-            $( "#formComentarios" ).submit(function( event ) {
+            $("#formComentarios").submit(function(event) {
                 event.preventDefault();
 
                 var data = $('#formComentarios').serialize()
@@ -116,28 +114,26 @@
                 console.log(data);
 
                 $.ajax({
-                    type:"POST",
-                    url:'src/insert_data.php',
+                    type: "POST",
+                    url: 'src/insert_data.php',
                     data: $('#formComentarios').serialize(),
                     beforeSend: function() {
                         $('#btn_enviar').html("loading...");
                         $("#btn_enviar").attr("disabled", true);
-
                     },
                     success: function(datos) {
-                            console.log(datos);
+                        console.log(datos);
 
-                        let html = "<div class='alert alert-success' role='alert'>" +  datos + "</div>"
+                        let html = "<div class='alert alert-success' role='alert'>" + datos + "</div>";
                         $('#monitor').html(html);
                         $("#btn_enviar").attr("disabled", false);
                         $('#btn_enviar').html("Enviar");
                         table_datatable.ajax.reload();
+                        document.forms["formComentarios"].reset();
                     }
                 });
-                document.forms["formComentarios"].reset();
             });
         });
-
     </script>
 </body>
 
